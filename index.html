@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>The notes app</title>
+    </head>
+
+    <body>
+        <form>
+            <label for = "email">e-mail</label>
+            <input type = "text" id = "email">
+            <br>
+            <label for = "password">password<label>
+            <input type = "password" id = "password">
+            <br>
+            <button type = "button" id = "register">Register</button>    
+        </form>
+
+        <script>
+            document.getElementById("register").onclick = sendData;
+        
+            function sendData() {
+                const xhr = new XMLHttpRequest();
+                xhr.open("post", "http://localhost:3000/register/");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify({
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value
+                }));
+                // xhr.send(JSON.stringify({
+                //     email: document.getElementById("email").value,
+                //     password: document.getElementById("password").value
+                // }));
+                //remarkable
+            }
+            </script>
+    </body>
+</html>
