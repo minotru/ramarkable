@@ -1,20 +1,32 @@
-const express = require("express");
-const router = express.Router();
 const User = require("../models/User");
 const fs = require("fs");
 
-router.get('/', function (req, res) {
-    const html = fs.readFileSync("./index.html", "utf8");
-    res.send(html);
-  });
 
-router.post("/register", function(req, res) {
-    const userData = {
-        email: req.body.email,
-        password: req.body.password
-    };
-    User.create(userData).then((user) => console.log(user));
-    
-});
+module.exports = function (app, passport) {
+    app.get('/', function (req, res) {
+        const html = fs.readFileSync("./index.html", "utf8");
+        res.send(html);
+    });
 
-module.exports = router;
+    app.get("/notes", function(req, res) {
+        res.send(`<p>logged in</p>`)
+    });
+
+    app.post("/signup", passport.authenticate("local-signup", {
+        successRedirect: "/notes",
+        failureRedirect: "/signup",
+        failureFlash: true
+    }));
+
+    app.post('/signin', 
+        passport.authenticate("local-signin", {
+            failureRedirect: "/signin",
+            successRedirect: "/notes"}
+        )
+    );
+
+    app.get("/logout", (req, res) => {
+        req.logout();
+        res.redirect("/");
+    });
+}

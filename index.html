@@ -19,8 +19,11 @@
         
             function sendData() {
                 const xhr = new XMLHttpRequest();
-                xhr.open("post", "http://localhost:3000/register/");
+                xhr.open("post", "http://localhost:3000/signup/");
                 xhr.setRequestHeader("Content-Type", "application/json");
+                // xhr.onload = function(res) {
+                //     console.log(res);
+                // }
                 xhr.send(JSON.stringify({
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
