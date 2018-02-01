@@ -16,16 +16,17 @@ router.get("/notes", function(req, res) {
 router.post("/signup", (req, res, next) => {
     User.register(new User({email: req.body.email}), req.body.password, (err) => {
         if (err) {
-            console.log("registration failed");
-            next(err);
+            console.log("registration failed: user exists");
+            res.redirect(401, "/");
         }
-        res.redirect("/notes");
+        else
+            res.redirect("/notes");
     })
 });
 
 router.post('/signin', 
     passport.authenticate("local", {
-        failureRedirect: "/signin",
+        failureRedirect: "/",
         successRedirect: "/notes"}
     )
 );
