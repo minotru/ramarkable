@@ -28,6 +28,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
-require("./routes/router")(app, passport);
+app.use("/", require("./routes/router"));
 
 const server = app.listen(3000);
