@@ -1,39 +1,52 @@
 <html>
-    <head>
-        <title>The notes app</title>
-    </head>
 
-    <body>
-        <form>
-            <label for = "email">e-mail</label>
-            <input type = "text" id = "email">
-            <br>
-            <label for = "password">password<label>
-            <input type = "password" id = "password">
-            <br>
-            <button type = "button" id = "register">Register</button>    
-        </form>
+<head>
+    <title>The notes app</title>
+</head>
 
-        <script>
-            document.getElementById("register").onclick = sendData;
-        
-            function sendData() {
-                const xhr = new XMLHttpRequest();
-                xhr.open("post", "http://localhost:3000/signup/");
-                xhr.setRequestHeader("Content-Type", "application/json");
-                // xhr.onload = function(res) {
-                //     console.log(res);
-                // }
-                xhr.send(JSON.stringify({
+<body>
+    <form>
+        <label for="email">e-mail</label>
+        <input type="text" id="email">
+        <br>
+        <label for="password">password
+            <label>
+                <input type="password" id="password">
+                <br>
+                <button type="button" id="register" onclick="register()">Register</button>
+                <button type="button" id="login" onclick="login()">Log in</button>
+                <button type="button" id="logout" onclick="logout()">Log out</button>
+    </form>
+
+    <script>
+        function send(method, url, data) {
+            const xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.send(data);
+        }
+
+        function register() {
+            send("post",
+                "http://localhost:3000/register/",
+                JSON.stringify({
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
                 }));
-                // xhr.send(JSON.stringify({
-                //     email: document.getElementById("email").value,
-                //     password: document.getElementById("password").value
-                // }));
-                //remarkable
-            }
-            </script>
-    </body>
+        }
+
+        function login() {
+            send("post",
+                "http://localhost:3000/login/",
+                JSON.stringify({
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value
+                }));
+        }
+
+        function logout() {
+            send("post", "http://localhost:3000/login/");
+        }
+    </script>
+</body>
+
 </html>

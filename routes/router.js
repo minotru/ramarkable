@@ -13,7 +13,7 @@ router.get("/notes", function(req, res) {
     res.send(`<p>logged in</p>`)
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/register", (req, res, next) => {
     User.register(new User({email: req.body.email}), req.body.password, (err) => {
         if (err) {
             console.log("registration failed: user exists");
@@ -24,7 +24,7 @@ router.post("/signup", (req, res, next) => {
     })
 });
 
-router.post('/signin', 
+router.post('/login', 
     passport.authenticate("local", {
         failureRedirect: "/",
         successRedirect: "/notes"}

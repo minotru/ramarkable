@@ -1,7 +1,8 @@
 {
-  "name": "notes",
+  "name": "remarkable",
   "version": "1.0.0",
   "description": "The epam front-end course training application",
+  "git": "https://github.com/minotru/ramarkable.git",
   "main": "server.js",
   "scripts": {
     "test": "mocha"
