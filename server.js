@@ -8,12 +8,11 @@ const flash = require("connect-flash");
 const MongoStore = require("connect-mongo")(session);
 const app = express();
 const logger = require("morgan")("tiny");
-
+require("./config/passport")(passport);
 const configDB = require("./config/database");
 mongoose.connect(configDB.url);
 const db = mongoose.connection;
 
-require("./config/passport")(passport);
 
 app.use(session({
     secret: "super-puper-secret",
