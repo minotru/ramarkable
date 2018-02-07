@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const LocalStrategy = require("passport-local");
-const GoogleStrategy = require("passport-google-oauth-2");
+const GoogleStrategy = require("passport-google-oauth20");
 
 module.exports = function (passport) {
     passport.serializeUser((user, done) => done(null, user.id));
@@ -22,6 +22,18 @@ module.exports = function (passport) {
                 return done(null, user);
             });
         })
+    );
+
+    passport.use(new GoogleStrategy({
+        clientID: "1032543868025-vk7g9bkc90s1ri94m6v54jt3an25f8qp.apps.googleusercontent.com",
+        clientSecret: "D8bGF6zJ8lWordMzBEQBa9Lb",
+        callbackURL: "http:/localhost:3000/auth/google/callback"
+    },
+        () => process.nextTick((accessToken, refreshToken, profile, done) => {
+            console.log("profile");
+            return done(null, profile);
+        })
+    )  
     );
 
     passport.use("local-register",new LocalStrategy({

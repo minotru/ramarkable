@@ -14,6 +14,8 @@ mongoose.connect(configDB.url);
 const db = mongoose.connection;
 
 
+app.use(express.static("public"));
+
 app.use(session({
     secret: "super-puper-secret",
     resave: false,
@@ -29,6 +31,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 app.use(logger);
 
-app.use("/", require("./routes/router"));
+app.use("/", require("./routes"));
 
 const server = app.listen(3000);

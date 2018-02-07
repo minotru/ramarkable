@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
-// const passportLocalMongoose = require("passport-local-mongoose");
 
-// define the schema for our user model
 const userSchema = mongoose.Schema({
     local: {
         email: String,

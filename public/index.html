@@ -31,7 +31,7 @@
 
         function register() {
             send("post",
-                "http://localhost:3000/register",
+                "/auth/register",
                 JSON.stringify({
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
@@ -40,7 +40,7 @@
 
         function login() {
             send("post",
-                "http://localhost:3000/login",
+                "/auth/login",
                 JSON.stringify({
                     email: document.getElementById("email").value,
                     password: document.getElementById("password").value
@@ -48,7 +48,7 @@
         }
 
         function logout() {
-            send("get", "http://localhost:3000/logout");
+            send("get", "/auth/logout");
         }
     </script>
 </body>
