@@ -1,9 +1,7 @@
 const router = require("express").Router();
-
-router.get("/notes", function (req, res) {
-    res.send(`<p>logged in</p>`)
-});
+const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 
 router.use("/auth", require("./auth"));
+router.use("/notes", ensureLoggedIn, require("./notes"));
 
 module.exports = router;
