@@ -13,7 +13,8 @@ const userSchema = mongoose.Schema({
         email: String,
         name: String
     },
-    folderId: mongoose.SchemaTypes.ObjectId
+    folderId: mongoose.SchemaTypes.ObjectId,
+    name: String
 });
 
 userSchema.pre("save", function(next) {
@@ -32,5 +33,15 @@ userSchema.statics.generateHash = function(password) {
 userSchema.methods.verifyPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 }
+
+userSchema.set("toJSON", {
+    transform: function(doc, ret, options) {
+        return {
+            id: ret._id,
+            name: ret.name,
+            folderId: ret.folderId
+        }
+    }
+})
 
 module.exports = mongoose.model('User', userSchema);
